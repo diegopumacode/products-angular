@@ -1,0 +1,36 @@
+<button nz-button nzType="primary" nzSize="large" routerLink="/products/create">
+    Crear Producto
+    <i nz-icon [nzType]="'smile'" [nzTheme]="'outline'"></i>
+</button>
+
+<div class="table">
+    <nz-table #basicTable [nzData]="products" [nzFrontPagination]="false" [nzLoading]="loadingProducts">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Descripcion</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of basicTable?.data">
+                <td>{{ data.name }}</td>
+                <td>{{ data.description }}</td>
+                <td>{{ data.price }}</td>
+                <td class="actions">
+                    <a [routerLink]="'/products/'+ data._id">Editar</a>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <div *ngIf="loadingDelete; else noLoading">
+                        <nz-spin nzSimple [nzSize]="'small'"></nz-spin>
+                    </div>
+                    <ng-template #noLoading>
+                        <a nz-popconfirm nzPopconfirmTitle="Seguro que desea eliminar el producto?"
+                            nzPopconfirmPlacement="bottom" (nzOnConfirm)="deleteProduct(data._id)" nzOkText="Si"
+                            nzCancelText="Cancelar" (nzOnCancel)="cancelDelete()">Eliminar</a>
+                    </ng-template>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

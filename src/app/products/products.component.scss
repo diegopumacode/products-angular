@@ -1,0 +1,19 @@
+button {
+    margin-bottom: 20px;
+}
+
+.actions {
+    display: flex;
+}
+
+.table {
+    overflow-x: hidden;
+
+    @media screen and (max-width: 600px) {
+        overflow-x: scroll;
+    }
+}
+
+.back-button{
+    margin: 10px 0;
+}
